@@ -3,10 +3,10 @@
 
 -record(state, {port}).
 
--export([start_link/1, init/1, handle_call/3, handle_cast/2, handle_info/2,
+-export([start_link/3, init/1, handle_call/3, handle_cast/2, handle_info/2,
          code_change/3, terminate/2]).
 
-start_link(ExtProg) ->
+start_link(ExtProg, Name, Group) ->
     Path = code:priv_dir(starling),
     DirName = filename:dirname(Path),
     ExtProg2 = case os:type() of
@@ -14,9 +14,10 @@ start_link(ExtProg) ->
                    _ -> ExtProg
                end,
     DrvPath = filename:join(["/", DirName, "ebin", ExtProg2]),
-    gen_server:start_link({local, ?MODULE}, starling_server, DrvPath, []).
+    gen_server:start_link({local, Name}, starling_server, [DrvPath, Group], []).
 
-init(DrvPath) ->
+init([DrvPath, Group]) ->
+    ok = pg2:join(Group, self()),
     process_flag(trap_exit, true),
     Port = open_port({spawn, DrvPath}, [{packet, 2}, binary, exit_status]),
     {ok, #state{port = Port}}.

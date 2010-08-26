@@ -1,4 +1,16 @@
+Release Notes V 2.0
 
+Starling which was previously hosted at http://code.google.com/p/starling/ has been brought into the Hypernumbers repositories at GitHub at http://github.com/hypernumbers/starling
+
+In this release multiple instances of the port driver can be loaded to provide to provided additional throughput.
+
+The number of instances is determined by the environment variables in the starling.app file.
+
+The environment variable 'poolsize' determines how many ports will be loaded and the environment variable 'group' determines the name of the pg2 group that the starling_server processes will be part of.
+
+The pg2 group is a global group and starling can now be deployed as a multiserver capability.
+
+********************************************************
 Starling is a Unicode text processing library for Erlang.
 It's based on ICU (http://icu-project.org/), which you need to have installed to use Starling.
 

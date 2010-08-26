@@ -7,7 +7,10 @@
 
 start(_Type, _Args) ->
     {ok, ExtProg} = application:get_env(starling, extprog),
-    starling_sup:start_link(ExtProg).
+    {ok, PoolSize} = application:get_env(starling, poolsize),
+    {ok, Group} = application:get_env(starling, group),
+    pg2:create(Group),
+    starling_sup:start_link([ExtProg, PoolSize, Group]).
 
 stop(_State) ->
     ok.

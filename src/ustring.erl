@@ -148,8 +148,10 @@ rstr(Str, Substr) ->
 
 %%% Utility functions.
 
-call(Msg) ->                                
-    gen_server:call(starling_server, Msg, timeout()).
+call(Msg) ->
+    {ok, Group} = application:get_env(starling, group),
+    Server = pg2:get_closest_pid(Group),
+    gen_server:call(Server, Msg, timeout()).
 
 timeout() ->
     {ok, Value} = application:get_env(starling, timeout),

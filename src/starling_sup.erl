@@ -8,14 +8,21 @@
 -define(SERVER, ?MODULE).
 
 %% Starts the supervisor.
-start_link(ExtProg) ->
-    supervisor:start_link(starling_sup, ExtProg).
+start_link(Args) ->
+    supervisor:start_link(starling_sup, Args).
 
 %% Supervisor callback. Returns restart strategy, maximum restart frequency,
 %% and child specs.
-init(ExtProg) ->
-    Child = {starling_server,{starling_server, start_link, [ExtProg]},
-             permanent, 10, worker, [starling_server]},
-
+init([ExtProg, PoolSize, Group]) ->
+    ChildSpecs = get_childspecs(PoolSize, ExtProg, Group, []),
     {ok, {{one_for_one, 3, 10},
-          [Child]}}.
+          ChildSpecs}}.
+
+get_childspecs(0, _ExtProg, _Group, Acc) -> Acc;
+get_childspecs(N, ExtProg, Group, Acc) ->
+    ID = list_to_atom("starling_server_" ++ integer_to_list(N)),
+    Child = {ID,{starling_server, start_link,
+                 [ExtProg, ID, Group]},
+             permanent, 10, worker, [starling_server]},
+    NewAcc = [Child | Acc],
+    get_childspecs(N - 1, ExtProg, Group, NewAcc).

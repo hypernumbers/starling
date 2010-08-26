@@ -5,5 +5,6 @@
     {registered, [starling]},
     {applications, [kernel, stdlib]},
     {mod, {starling_app, []}},
-    {env, [{extprog, "starling_drv"}, {timeout, 3000}]}
+    {env, [{extprog, "starling_drv"}, {timeout, 3000}, 
+           {poolsize, 5}, {group, starling_pg2}]}
 ]}.
