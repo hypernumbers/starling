@@ -34,7 +34,7 @@ int normalize(UChar* str, UChar* resbuf, int resbuflen)
 int upcase(UChar* str, UChar* resbuf, int resbuflen)
 {
   UErrorCode errcode = U_ZERO_ERROR;
-  int len = u_strToUpper(resbuf, resbuflen, str, -1, "en", &errcode);
+  u_strToUpper(resbuf, resbuflen, str, -1, "en", &errcode);
   MBERR("u_strToUpper error", -1);
   return 0;
 }
@@ -42,7 +42,7 @@ int upcase(UChar* str, UChar* resbuf, int resbuflen)
 int downcase(UChar* str, UChar* resbuf, int resbuflen)
 {
   UErrorCode errcode = U_ZERO_ERROR;
-  int length = u_strToLower(resbuf, resbuflen, str, -1, "en", &errcode);
+  u_strToLower(resbuf, resbuflen, str, -1, "en", &errcode);
   MBERR("u_strToLower error", -1);
   return 0;
 }

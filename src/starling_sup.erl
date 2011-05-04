@@ -1,4 +1,3 @@
-
 -module(starling_sup).
 -behaviour(supervisor).
 

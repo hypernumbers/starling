@@ -8,12 +8,11 @@
 
 start_link(ExtProg, Name, Group) ->
     Path = code:priv_dir(starling),
-    DirName = filename:dirname(Path),
     ExtProg2 = case os:type() of
                    {win32, nt} -> ExtProg ++ ".exe";
                    _ -> ExtProg
                end,
-    DrvPath = filename:join(["/", DirName, "ebin", ExtProg2]),
+    DrvPath = filename:join([Path, ExtProg2]),
     gen_server:start_link({local, Name}, starling_server, [DrvPath, Group], []).
 
 init([DrvPath, Group]) ->

@@ -5,6 +5,7 @@ CC = (`icu-config --cc` + `icu-config --cflags` +
       "-std=c99 -pedantic -Wall").gsub(/\n/, " ")
 
 BLD = "ebin"
+PRV = "priv"
 SRC = "src"
 C_SRC = "c_src"
 ERL_FILES = Dir["#{SRC}/*.erl"].join(" ")
@@ -28,7 +29,7 @@ task(:app) do
 end
 
 task(:drv) do
-  sh %{#{CC} #{DRV_FILES} -o #{File.join(BLD, "starling_drv")} #{ICU_INCLUDE_FLAGS} #{EI_INCLUDE_FLAGS} #{ICU_LD_FLAGS} #{EI_LD_FLAGS}} do |ok, res|
+  sh %{#{CC} #{DRV_FILES} -o #{File.join(PRV, "starling_drv")} #{ICU_INCLUDE_FLAGS} #{EI_INCLUDE_FLAGS} #{ICU_LD_FLAGS} #{EI_LD_FLAGS}} do |ok, res|
     if !ok
       puts "gcc error, status = #{res.exitstatus}"
     end
@@ -37,5 +38,5 @@ end
 
 task(:clean) do
   Dir["ebin/*.beam"].each { |x| rm x rescue nil }
-  rm File.join("ebin", "starling_drv") rescue nil
+  rm File.join("priv", "starling_drv") rescue nil
 end
