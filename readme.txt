@@ -1,3 +1,8 @@
+Additional Info
+
+There is a project to implement ICU as a NIF in Erlang. You can find it at:
+https://github.com/beerriot/icu4e
+
 Release Notes V 2.0
 
 Starling which was previously hosted at http://code.google.com/p/starling/ has been brought into the Hypernumbers repositories at GitHub at http://github.com/hypernumbers/starling
@@ -23,9 +28,9 @@ To compile, just run `rake` from Starling's root directory.
 
 Once you've compiled Starling, start the Erlang shell with:
 `erl -pa ~/path/to/starling/ebin`
-  
+
 You can then use Starling like this:
-  
+
   1> application:start(starling_app).
   ok
   2> S = ustring:new("hello").
