@@ -1,7 +1,8 @@
 Additional Info
 
-There is a project to implement ICU as a NIF in Erlang. You can find it at:
+There is are a couple of projects to implement ICU as a NIF in Erlang. You can find them at:
 https://github.com/beerriot/icu4e
+https://github.com/freeakk/i18n
 
 Release Notes V 2.0
 
