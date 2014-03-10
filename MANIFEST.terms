@@ -18,9 +18,9 @@
 %% Optional contact details
 % {irc, ""}. % optional
 {maintainers, [
-               [{name, "Gordon Guthrie"},
-                {email, "gordon@hypernumbers.com"},
-                {twitter, "gordonguthrie"}
+               [{name,    "Gordon Guthrie"},
+                {email,   "gordon@hypernumbers.com"},
+                {twitter, "@gordonguthrie"}
                 ]
                 ]}. %optional
 % {project_homepage, ""}. % optional
